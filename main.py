@@ -1,3 +1,5 @@
+import random
+import multiprocessing
 
 employees = [
 	{
@@ -538,8 +540,14 @@ employees = [
 ]
 
 
-import random
-import multiprocessing
+
+
+def remove_duplicates_by_keys(employees):
+    """ removes duplicated employee entry by the name key"""
+    
+    unique_dicts = {d['name']: d for d in employees}.values()
+    employees = list(unique_dicts)
+    return employees
 
 def create_dwarf_giant_pairs(employees):
     """
@@ -602,7 +610,8 @@ def valid_pair(list_tups):
 
 
 def run():
-	output = create_dwarf_giant_pairs(employees)
+	duplicate_free_employees = remove_duplicates_by_keys(employees)
+	output = create_dwarf_giant_pairs(duplicate_free_employees)
 	dwarf_giant_pair = valid_pair(output)
 
 	print(dwarf_giant_pair) 
