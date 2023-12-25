@@ -574,7 +574,7 @@ def valid_pair(list_tups):
   """ 
   
   shuffle_pair = [(list_tups[i], list_tups[-i-1]) for i in range(len(list_tups) // 2)]
-  print(shuffle_pair)
+  #print(shuffle_pair)
 
   #int_pair = shuffle_pair[:len(shuffle_pair)//2]
   #valid_pair(shuffle_pair)
