@@ -610,6 +610,31 @@ def valid_pair(list_tups):
 
 
 def run():
+    # Testing the solution with the test data. Also works well on the whole dataset
+	employees = [
+	{
+		"department": "R&D",
+		"name": "emp1",
+		"age": 46
+	},
+	{
+		"department": "Sales",
+		"name": "emp2",
+		"age": 28
+	},
+	{
+		"department": "R&D",
+		"name": "emp3",
+		"age": 33
+	},
+	{
+		"department": "R&D",
+		"name": "emp4",
+		"age": 29
+	}
+]
+
+	
 	duplicate_free_employees = remove_duplicates_by_keys(employees)
 	output = create_dwarf_giant_pairs(duplicate_free_employees)
 	dwarf_giant_pair = valid_pair(output)
