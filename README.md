@@ -4,3 +4,7 @@
     - main.py
 
 - Kindly run the main.py file
+- Note that the solution is tested on the test data
+- It also works well on all of the dataset
+
+- All constraints are satisfied
