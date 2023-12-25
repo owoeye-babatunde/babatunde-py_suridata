@@ -539,61 +539,56 @@ employees = [
 
 
 import random
+import multiprocessing
 
 def create_dwarf_giant_pairs(employees):
-    """Creates unique dwarf-giant pairs, ensuring fairness and randomness."""
+    """
+    create unique dwarf giant pairs from a list of employees while ensuring fairness and 
+    randomness
+    Args:
+        employees: A list of employee objects, each containing three fields.
 
-    # Remove duplicates based on unique index (department, name, age)
-    unique_employees = list({tuple(emp.values()): emp for emp in employees}.values())
+    Returns:
+        A list of tuples, where each tuple represents a Dwarf-Giant pair (name, name)
+    
+    """
+    unique_employees = {tuple(employee.values()): employee for employee in employees}
+    employee_names = list(unique_employees.keys())
 
-    # Shuffle employees randomly
-    random.shuffle(unique_employees)
-
-    # Create pairs, ensuring each employee is both a dwarf and a giant once
-    pairs = []
-    for i in range(0, len(unique_employees), 2):
-        pairs.append((unique_employees[i]["name"], unique_employees[i + 1]["name"]))
-
-    # Ensure no inverse pairs exist
-    unique_pairs = []
-    seen_pairs = set()
-    for dwarf, giant in pairs:
-        if (dwarf, giant) not in seen_pairs and (giant, dwarf) not in seen_pairs:
-            unique_pairs.append((dwarf, giant))
-            seen_pairs.add((dwarf, giant))
-
-    return unique_pairs
+    random.shuffle(employee_names)
+    #print(employee_names)
+    pairs = [(employee_names[i], employee_names[-i-1]) for i in range(len(employee_names) // 2)]
+    #print(pairs)
+    name_pair = [(unique_employees[pair[0]]["name"], unique_employees[pair[1]]["name"]) for pair in pairs]
+    #print(name_pair)
+    return name_pair
 
 
-
+    
 
 
 
-def cross_combinations(tup):
-  "prints all unique cross-combinations of a tuple"
+def valid_pair(list_tups):
+  """ This function checks for valid pairs and output a d
+  warf-giant pair that satisfies the four constraints
+  """ 
+  
+  shuffle_pair = [(list_tups[i], list_tups[-i-1]) for i in range(len(list_tups) // 2)]
+  print(shuffle_pair)
 
-  # A list to store the combinations
-  result = []
-  # Loop through the first and second elements of the tuple
-  for i in range(2):
-    for j in range(2):
-      # Check if the elements are different
-      if tup[i][0] != tup[j][1]:
-        # Append a new pair of tuples to the result list
-        result.append((tup[i][0], tup[j][1]))
-        result.append((tup[j][0], tup[i][1]))
-  # Print the result list
-  return result
+  #int_pair = shuffle_pair[:len(shuffle_pair)//2]
+  #valid_pair(shuffle_pair)
+  final_answer = []
+  for shuff in shuffle_pair:
+    #random.shuffle(shuff)
+    reversed_tup = shuff[::-1] #reverse original
+    shuffle_pair1 = [(shuff[0][i], shuff[1][-i-1]) for i in range(2)]
+    shuffle_pair2 = [(reversed_tup[0][-i+1], reversed_tup[1][-i+1]) for i in range(2)]
+    final_answer = final_answer + shuffle_pair1 + shuffle_pair2
+
+  return final_answer
 
 
-
-# Example usage
-employees = [
-    {"department": "R&D", "name": "emp1", "age": 46},
-    {"department": "Sales", "name": "emp2", "age": 28},
-    {"department": "R&D", "name": "emp3", "age": 33},
-    {"department": "R&D", "name": "emp4", "age": 29}
-]
 
  
 
@@ -608,9 +603,9 @@ employees = [
 
 def run():
 	output = create_dwarf_giant_pairs(employees)
-	final = list(set(cross_combinations(output)))
+	dwarf_giant_pair = valid_pair(output)
 
-	print(final) 
+	print(dwarf_giant_pair) 
 
 
 run()
