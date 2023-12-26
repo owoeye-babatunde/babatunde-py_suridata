@@ -1,10 +1,9 @@
 import streamlit as st
 import json
 
-# Assume dwarf_giant_pair function is defined elsewhere
 from main import run
 
-# Set a visually pleasing theme
+# Set a more visually pleasing theme
 st.set_page_config(page_title="Dwarf-Giant Pair Finder",
                    layout="wide",  # Expand to full width
                    initial_sidebar_state="expanded")  # Keep sidebar open
@@ -32,7 +31,7 @@ body {
 
 st.title(" Find the Dwarf-Giant Pair ‍♂️ ‍♂️")
 
-# Input section with clear instructions and file type hint
+
 st.write("**Upload a JSON file containing employee data:**")
 uploaded_file = st.file_uploader("Choose a JSON file", type=["json"])
 
@@ -43,7 +42,7 @@ if uploaded_file:
     except json.JSONDecodeError:
         st.error("Invalid JSON format. Please upload a valid JSON file.")
 
-# Provide a sample list if no file is uploaded
+# a sample list if no file is uploaded
 if not employee_list:
     st.caption("**Sample Data:**")
     employee_list = [
