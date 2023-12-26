@@ -1,14 +1,15 @@
 import streamlit as st
 import json
+import random
 
-from main import run
+from main import remove_duplicates_by_all_values, listify, dwarf_giant
 
-# Set a more visually pleasing theme
+#a more visually pleasing theme
 st.set_page_config(page_title="Dwarf-Giant Pair Finder",
                    layout="wide",  # Expand to full width
                    initial_sidebar_state="expanded")  # Keep sidebar open
 
-# Apply a custom theme for a unique look
+#Apply a custom theme
 st.markdown("""
 <style>
 body {
@@ -77,11 +78,15 @@ if employee_list:
             st.error("Missing 'name' key in one or more employees!")
         else:
             # Calculate dwarf-giant pair
-            dwarf_giant = run(employee_list)
+                employees = remove_duplicates_by_all_values(employee_list)
+                outer_list =listify(employees) 
+                random.shuffle(outer_list) 
+                pairs = dwarf_giant(outer_list)
+            #dwarf_giant = run(employee_list)
 
             # Display results in a visually appealing format
-            st.success(" Dwarf-Giant Pair Revealed! ")
-            st.write(f"{dwarf_giant}")
+                st.success(" Dwarf-Giant Pair Revealed! ")
+                st.write(f"{pairs}")
     except Exception as e:
         st.error(f"An error occurred: {e}")
 

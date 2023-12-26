@@ -1,5 +1,6 @@
 import unittest
-from main import run, remove_duplicates_by_keys, remove_duplicates_by_all_values
+import random
+from main import dwarf_giant, listify, remove_duplicates_by_all_values
 
 class TestCreateDwarfGiantPairs(unittest.TestCase):
     """
@@ -544,18 +545,20 @@ class TestCreateDwarfGiantPairs(unittest.TestCase):
 		"age": 44
 	}
 ]
-	
 
+#output: [(emp2, emp4), (emp4, emp1), (emp1, emp3), (emp3, emp2)]
         employees = remove_duplicates_by_all_values(employees)
+        outer_list =listify(employees) 
+        
+        random.shuffle(outer_list)
+        pairs = dwarf_giant(outer_list)
 
-        pairs = run(employees)
-        #print(len(pairs), len(employees))
-
-        self.assertEqual(len(pairs), len(employees) - len(employees)%2)  # Correct number of pairs
-        self.assertEqual(len(set(pair for pair in pairs)), len(employees) - len(employees)%2)  # Unique pairs
+        self.assertEqual(len(pairs), len(employees))  # Correct number of pairs
+        self.assertEqual(len(set(pair for pair in pairs)), len(employees))  # Unique pairs
+        self.assertTrue(all(employee["name"] in [pair[0] for pair in pairs] for employee in employees))  # All employees included
+        self.assertTrue(all(employee["name"] in [pair[1] for pair in pairs] for employee in employees))  # All employees included
         self.assertFalse(any((pair[1], pair[0]) in pairs for pair in pairs))  # No reverse pairs
 
 if __name__ == "__main__":
-
+    
     unittest.main()
-	
