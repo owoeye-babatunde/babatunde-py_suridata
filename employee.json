@@ -1,13 +1,4 @@
-import unittest
-from main import run, remove_duplicates_by_keys, remove_duplicates_by_all_values
-
-class TestCreateDwarfGiantPairs(unittest.TestCase):
-    """
-    Test cases for create_dwarf_giant_pairs function.
-    """
-
-    def test_pairs(self):
-        employees = [
+[
 	{
 		"department": "R&D",
 		"name": "Nikolas Porter",
@@ -544,18 +535,3 @@ class TestCreateDwarfGiantPairs(unittest.TestCase):
 		"age": 44
 	}
 ]
-	
-
-        employees = remove_duplicates_by_all_values(employees)
-
-        pairs = run(employees)
-        #print(len(pairs), len(employees))
-
-        self.assertEqual(len(pairs), len(employees) - len(employees)%2)  # Correct number of pairs
-        self.assertEqual(len(set(pair for pair in pairs)), len(employees) - len(employees)%2)  # Unique pairs
-        self.assertFalse(any((pair[1], pair[0]) in pairs for pair in pairs))  # No reverse pairs
-
-if __name__ == "__main__":
-
-    unittest.main()
-	

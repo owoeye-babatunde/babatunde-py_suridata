@@ -2,6 +2,15 @@
 
 - The goal of this exercise is to simulate the Dwarf-Giant" Game
 
+- The easiest way to test this app is from the deployed web service here [dwarf giant game](https://gwarfgiant.onrender.com/)
+- The json files to input into the web application have been included. see [employee json file](./employee.json) 
+   and [test_employee json file](./test_employee.json)
+
+- to run the web application from the command line. hit "streamlit run frontend.py"
+
+
+
+
 - It contains three files
     - main.py
     - run.py
